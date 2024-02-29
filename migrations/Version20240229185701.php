@@ -10,11 +10,11 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20240227193700 extends AbstractMigration
+final class Version20240229185701 extends AbstractMigration
 {
     public function getDescription(): string
     {
-        return 'Add category  to book table';
+        return 'Category added books table';
     }
 
     public function up(Schema $schema): void
