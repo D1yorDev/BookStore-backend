@@ -10,10 +10,7 @@
 	use Symfony\Component\Serializer\Annotation\Groups;
 	
 	#[ORM\Entity(repositoryClass: CategoryRepository::class)]
-	#[ApiResource(
-		normalizationContext: ['groups' => 'category:read'],
-		denormalizationContext: ['groups' => 'category:write']
-	)]
+	#[ApiResource]
 	class Category
 	{
 		#[ORM\Id]
@@ -22,7 +19,6 @@
 		private ?int $id = null;
 		
 		#[ORM\Column(length: 255)]
-		#[Groups(['category:write'])]
 		private ?string $name = null;
 		
 		#[ORM\OneToMany(mappedBy: 'category', targetEntity: Book::class)]
