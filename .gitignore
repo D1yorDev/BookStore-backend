@@ -5,6 +5,7 @@
 /docker/mysql/db
 /docker/nginx/logs
 /docker/php/bash_history
+/public/media
 
 ###> symfony/framework-bundle ###
 /.env.local
