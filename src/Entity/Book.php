@@ -9,9 +9,13 @@ use ApiPlatform\Metadata\ApiResource;
 use App\Repository\BookRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: BookRepository::class)]
-#[ApiResource]
+#[ApiResource(
+	normalizationContext: ['groups' => ['book:read']],
+	denormalizationContext: ['groups' => ['book:write']],
+)]
 #[ApiFilter(SearchFilter::class, properties: [
 	'id'  => 'exect',
 	'name' => 'partial',
@@ -26,22 +30,28 @@ class Book
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups(['book:read'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups(['book:read', 'book:write'])]
     private ?string $name = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups(['book:read', 'book:write'])]
     private ?string $description = null;
 
     #[ORM\Column(type: Types::TEXT)]
+    #[Groups(['book:read', 'book:write'])]
     private ?string $text = null;
 
     #[ORM\ManyToOne(inversedBy: 'books')]
     #[ORM\JoinColumn(nullable: false)]
+    #[Groups(['book:read','book:write'])]
     private ?Category $category = null;
 
     #[ORM\ManyToOne]
+    #[Groups(['book:read', 'book:write'])]
     private ?MediaObject $picture = null;
 
    
